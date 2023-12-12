@@ -1,3 +1,4 @@
+import { exec } from 'node:child_process';
 /**
  * This file will automatically be loaded by webpack and run in the "renderer" context.
  * To learn more about the differences between the "main" and the "renderer" context in
@@ -29,3 +30,16 @@
 import './index.css';
 
 console.log('👋 This message is being logged by "renderer.js", included via webpack');
+
+(async () => {
+	try {
+		const result = await exec('aptos node run-local-testnet');
+		console.log(result.stdout);
+	} catch (error) {
+		console.error(error);
+	}
+})();
+
+// document.getElementById('start-node').onclick = function () {
+// 	document.getElementById('node-log').innerText = execSync('aptos node run-local-testnet').toString()
+// }
